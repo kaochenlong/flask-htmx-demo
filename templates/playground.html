@@ -3,4 +3,7 @@
 {% block content %}
     <span style="background-color: black; color: white; padding: 2px 6px; border-radius: 4px;">{{ now }}</span>
     <h1>HTMX/Alpine 練習</h1>
+
+    <button hx-get="/playground/lottery" hx-target="#number" class="btn btn-lg btn-dark">抽獎</button>
+    <div id="number"></div>
 {% endblock %}

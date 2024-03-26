@@ -1,4 +1,5 @@
 from datetime import datetime
+from random import randint
 from models.post import db, Post
 from flask import Flask, render_template, redirect, url_for, request
 from flask_sqlalchemy import SQLAlchemy
@@ -58,20 +59,26 @@ def update_post(id):
 
     db.session.commit()
 
-    return redirect(url_for("show_post", id=id))
+    return show_post(id)
 
 
+@app.route("/posts/<int:id>", methods=["DELETE"])
+def destroy_post(id):
+    post = Post.query.get(id)
+    db.session.delete(post)
+    db.session.commit()
+
+    return ""
+
+
+# HTMX/Alpine Playground
 @app.route("/playground")
 def playground():
     now = datetime.now()
     return render_template("playground.html", now=now)
 
 
-@app.route("/hello")
-def hello():
-    return "<h1>hello world</h1>"
-
-
+# Entry point
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
