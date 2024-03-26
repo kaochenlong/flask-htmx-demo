@@ -1,7 +1,11 @@
+from models.post import db
 from flask import Flask, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
+db.init_app(app)
 
 
 @app.route("/")
@@ -37,3 +41,11 @@ def update_post(id):
 @app.route("/htmx-demo")
 def htmx_demo():
     return render_template("htmx/demo.html")
+
+
+if __name__ == "__main__":
+    with app.app_context():
+        print("Creating database...")
+        db.create_all()
+
+    app.run(debug=True, port=3000)
