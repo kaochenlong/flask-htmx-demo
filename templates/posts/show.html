@@ -1,10 +1,13 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+    <a href="{{ url_for('home') }}" class="">←文章列表</a>
+
     <h1>{{ post.title }}</h1>
     <article>
       <p>{{ post.content }}</p>
     </article>
+
     <footer>
       <a href="{{ url_for('edit_post', id=post.id) }}" class="btn btn-dark">編輯</a>
     </footer>
