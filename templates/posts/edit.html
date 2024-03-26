@@ -1,8 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <h1>新增文章</h1>
-    <form action="{{ url_for('create_post') }}" method="post">
+    <h1>Edit {{ id }}</h1>
+
+    <form action="{{ url_for('update_post', id=id) }}" method="post">
         <div class="form-group my-2">
           <label>標題</label>
           <input type="text" class="form-control form-control-lg">
